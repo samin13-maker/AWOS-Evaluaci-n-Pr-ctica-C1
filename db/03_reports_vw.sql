@@ -1,10 +1,3 @@
-/* VIEW: vw_most_borrowed_books
-Devuelve el ranking de libros más prestados.
-Grain: un registro por libro.
-Métricas: total_prestamos, ranking.
-VERIFY:
-SELECT * FROM vw_most_borrowed_books; */
-
 CREATE OR REPLACE VIEW vw_most_borrowed_books AS
 SELECT
     b.id AS book_id,
@@ -17,14 +10,6 @@ JOIN copies c ON c.book_id = b.id
 JOIN loans l ON l.copy_id = c.id
 GROUP BY b.id, b.title, b.author;
 
-
-
-/* VIEW: vw_overdue_loans
-Devuelve los préstamos vencidos con cálculo de días de atraso y multa sugerida.
-Grain: un registro por préstamo vencido.
-Métricas: dias_atraso, monto_sugerido.
-VERIFY:
-SELECT * FROM vw_overdue_loans; */
 
 CREATE OR REPLACE VIEW vw_overdue_loans AS
 WITH overdue AS (
@@ -56,14 +41,6 @@ SELECT
 FROM overdue;
 
 
-
-/* VIEW: vw_fines_summary
-Devuelve un resumen mensual de multas pagadas y pendientes.
-Grain: un registro por mes.
-Métricas: total_pagadas, total_pendientes.
-VERIFY:
-SELECT * FROM vw_fines_summary; */
-
 CREATE OR REPLACE VIEW vw_fines_summary AS
 SELECT
     DATE_TRUNC('month', l.due_at) AS mes,
@@ -74,14 +51,6 @@ JOIN loans l ON l.id = f.loan_id
 GROUP BY DATE_TRUNC('month', l.due_at)
 HAVING SUM(f.amount) > 0;
 
-
-
-/* VIEW: vw_member_activity
-Devuelve la actividad de los socios, incluyendo total de préstamos y tasa de atraso.
-Grain: un registro por socio.
-Métricas: total_prestamos, prestamos_atrasados, tasa_atraso.
-VERIFY:
-SELECT * FROM vw_member_activity; */
 
 CREATE OR REPLACE VIEW vw_member_activity AS
 SELECT
@@ -111,13 +80,6 @@ JOIN loans l ON l.member_id = m.id
 GROUP BY m.id, m.name
 HAVING COUNT(l.id) > 0;
 
-
-/*VIEW: vw_inventory_health
-Devuelve el estado del inventario por categoría de libro.
-Grain: un registro por categoría.
-Métricas: disponibles, prestados, perdidos.
-VERIFY:
-SELECT * FROM vw_inventory_health; */ 
 
 CREATE OR REPLACE VIEW vw_inventory_health AS
 SELECT

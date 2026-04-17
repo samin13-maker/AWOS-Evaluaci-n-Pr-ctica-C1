@@ -1,0 +1,85 @@
+INSERT INTO members (name, email, member_type, joined_at) VALUES
+('Ana López',        'ana@mail.com',      'student',  '2023-01-10'),
+('Carlos Ruiz',      'carlos@mail.com',   'teacher',  '2022-08-05'),
+('Luis Gómez',       'luis@mail.com',     'student',  '2023-06-01'),
+('Fernanda Torres',  'fer@mail.com',      'external', '2022-11-15'),
+('María Pérez',      'maria@mail.com',    'student',  '2023-03-20'),
+('Jorge Sánchez',    'jorge@mail.com',    'teacher',  '2021-05-10'),
+('Sofía Ramírez',    'sofia@mail.com',    'student',  '2023-09-01'),
+('Diego Hernández',  'diego@mail.com',    'external', '2022-02-28'),
+('Valeria Cruz',     'valeria@mail.com',  'student',  '2024-01-15'),
+('Roberto Mendoza',  'roberto@mail.com',  'teacher',  '2020-07-20');
+
+INSERT INTO books (title, author, category, isbn) VALUES
+('Clean Code',                  'Robert Martin',    'Programming', '1111'),
+('The Pragmatic Programmer',    'Andrew Hunt',      'Programming', '2222'),
+('1984',                        'George Orwell',    'Novel',       '3333'),
+('Refactoring',                 'Martin Fowler',    'Programming', '4444'),
+('Animal Farm',                 'George Orwell',    'Novel',       '5555'),
+('Design Patterns',             'Gang of Four',     'Programming', '6666'),
+('Sapiens',                     'Yuval Noah',       'History',     '7777'),
+('Don Quijote',                 'Cervantes',        'Classic',     '8888'),
+('El Principito',               'Saint-Exupery',    'Classic',     '9999'),
+('Introduction to Algorithms',  'Cormen et al.',    'Programming', '0000'),
+('Brave New World',             'Aldous Huxley',    'Novel',       '1112'),
+('Los de Abajo',                'Mariano Azuela',   'Classic',     '1113');
+
+INSERT INTO copies (book_id, barcode, status) VALUES
+(1,  'BC001', 'available'),
+(1,  'BC002', 'loaned'),
+(1,  'BC003', 'available'),
+(2,  'BC004', 'loaned'),
+(2,  'BC005', 'loaned'),
+(3,  'BC006', 'loaned'),
+(3,  'BC007', 'available'),
+(4,  'BC008', 'available'),
+(4,  'BC009', 'loaned'),
+(5,  'BC010', 'lost'),
+(5,  'BC011', 'available'),
+(6,  'BC012', 'loaned'),
+(6,  'BC013', 'available'),
+(7,  'BC014', 'loaned'),
+(7,  'BC015', 'available'),
+(8,  'BC016', 'loaned'),
+(9,  'BC017', 'available'),
+(10, 'BC018', 'loaned'),
+(10, 'BC019', 'lost'),
+(11, 'BC020', 'available'),
+(12, 'BC021', 'loaned');
+
+INSERT INTO loans (copy_id, member_id, loaned_at, due_at, returned_at) VALUES
+-- Prestamos vencidos sin devolver
+(2,  1, '2024-01-01', '2024-01-10', NULL),
+(5,  3, '2024-02-01', '2024-02-10', NULL),
+(10, 5, '2024-01-15', '2024-01-25', NULL),
+(12, 7, '2024-03-01', '2024-03-08', NULL),
+(16, 9, '2024-04-01', '2024-04-08', NULL),
+(18, 2, '2024-05-01', '2024-05-10', NULL),
+(21, 4, '2024-06-01', '2024-06-07', NULL),
+-- Prestamos devueltos
+(4,  2, '2024-01-05', '2024-01-12', '2024-01-15'),
+(6,  4, '2024-03-05', '2024-03-12', '2024-03-10'),
+(8,  1, '2024-04-10', '2024-04-20', '2024-04-18'),
+(9,  6, '2024-02-15', '2024-02-25', '2024-02-23'),
+(13, 3, '2024-05-01', '2024-05-10', '2024-05-09'),
+(14, 8, '2024-06-01', '2024-06-10', '2024-06-08'),
+(15, 10,'2024-07-01', '2024-07-10', '2024-07-12'),
+(17, 1, '2024-07-15', '2024-07-25', '2024-07-24'),
+(20, 5, '2024-08-01', '2024-08-10', '2024-08-09'),
+(3,  6, '2024-09-01', '2024-09-10', '2024-09-08'),
+(7,  7, '2024-09-05', '2024-09-15', '2024-09-14'),
+(11, 8, '2024-10-01', '2024-10-10', '2024-10-09'),
+(19, 9, '2024-10-05', '2024-10-15', NULL);
+
+INSERT INTO fines (loan_id, amount, paid_at) VALUES
+(8,   50.00, '2024-01-20'),
+(9,   30.00, '2024-03-15'),
+(14,  20.00, '2024-06-12'),
+(15,  45.00, '2024-07-15'),
+(1,   80.00, NULL),
+(2,   60.00, NULL),
+(3,  120.00, NULL),
+(4,   40.00, NULL),
+(5,   35.00, NULL),
+(6,   90.00, NULL),
+(7,   25.00, NULL);
