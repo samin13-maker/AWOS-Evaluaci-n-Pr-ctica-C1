@@ -20,7 +20,9 @@ Para ejecutar el proyecto es necesario contar con:
 ### 1. Clonar el repositorio
 
 En tu terminal ejeucta los comandos:
+
 git clone https://github.com/samin13-maker/AWOS-Evaluaci-n-Pr-ctica-C1.git
+
 cd TU_REPOSITORIO
 
 
